@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="87db5d2e-be1a-40f4-a82f-34a98681fc4d" name="hpc">
+        <fileTransfer rootFolder="/home/nfs/ombrettastraff/ombrettastraff_staffbulk" accessType="SFTP" host="linux-bastion.tudelft.nl" port="22" sshConfigId="c4f7cd27-e08e-4723-bcb2-01dad4115a42" sshConfig="ombrettastraff@linux-bastion.tudelft.nl:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
