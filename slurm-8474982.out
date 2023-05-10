@@ -1,0 +1,9 @@
+Namespace(image='kate', model='UNET')
+Traceback (most recent call last):
+  File "inpainting.py", line 220, in <module>
+    main(net_type=args.model, img_name=args.image)
+  File "inpainting.py", line 59, in main
+    os.mkdir('results/inpainting/'+NET_TYPE)
+FileExistsError: [Errno 17] File exists: 'results/inpainting/UNET'
+srun: error: cor1: task 0: Exited with exit code 1
+srun: launch/slurm: _step_signal: Terminating StepId=8474982.0

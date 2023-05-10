@@ -47,12 +47,19 @@ def skip(
         deeper = nn.Sequential()
         skip = nn.Sequential()
 
+        skip.add(PrintLayer())
+        deeper.add(PrintLayer())
+
         if num_channels_skip[i] != 0:
             model_tmp.add(Concat(1, skip, deeper))
         else:
             model_tmp.add(deeper)
+
+        deeper.add(PrintLayer())
         
         model_tmp.add(bn(num_channels_skip[i] + (num_channels_up[i + 1] if i < last_scale else num_channels_down[i])))
+
+        deeper.add(PrintLayer())
 
         if num_channels_skip[i] != 0:
             skip.add(conv(input_depth, num_channels_skip[i], filter_skip_size, bias=need_bias, pad=pad))
@@ -65,9 +72,13 @@ def skip(
         deeper.add(bn(num_channels_down[i]))
         deeper.add(act(act_fun))
 
+        deeper.add(PrintLayer())
+
         deeper.add(conv(num_channels_down[i], num_channels_down[i], filter_size_down[i], bias=need_bias, pad=pad))
         deeper.add(bn(num_channels_down[i]))
         deeper.add(act(act_fun))
+
+        deeper.add(PrintLayer())
 
         deeper_main = nn.Sequential()
 
@@ -84,6 +95,7 @@ def skip(
         model_tmp.add(bn(num_channels_up[i]))
         model_tmp.add(act(act_fun))
 
+        model_tmp.add(PrintLayer())
 
         if need1x1_up:
             model_tmp.add(conv(num_channels_up[i], num_channels_up[i], 1, bias=need_bias, pad=pad))
@@ -92,6 +104,8 @@ def skip(
 
         input_depth = num_channels_down[i]
         model_tmp = deeper_main
+
+        model_tmp.add(PrintLayer())
 
     model.add(conv(num_channels_up[0], num_output_channels, 1, bias=need_bias, pad=pad))
     if need_sigmoid:
